@@ -696,7 +696,7 @@ function settingsDialog() {
     const status = repo.status;
     const last = status.lastBackupAt ? new Intl.DateTimeFormat('zh-CN', { timeZone: 'Asia/Shanghai', dateStyle: 'medium', timeStyle: 'short' }).format(new Date(status.lastBackupAt)) : '尚无备份';
     ui.modal = { kind: 'settings' };
-    return dialog('数据与备份', `<div class="settings-status"><span class="status-orb"></span><div><strong>项目保存在这台电脑</strong><p class="preserve">${esc(status.dataDir)}</p></div>${pill('Windows 便携版')}</div>
+    return dialog('数据与备份', `<div class="settings-status"><span class="status-orb"></span><div><strong>项目保存在这台电脑</strong><p class="preserve">${esc(status.dataDir)}</p></div>${pill('Windows 桌面版')}</div>
       <section class="settings-section"><h3>本机备份</h3><p>最近备份：${esc(last)}。每天首次使用时备份已有数据，保留最近 14 份每日副本。</p>${status.backupWarning ? `<div class="notice warning">${esc(status.backupWarning)}</div>` : ''}<div class="button-row">${btn('立即备份', 'desktop-backup', '', 'btn btn-primary')}${btn('打开备份文件夹', 'open-backups')}${btn('导出到其他位置', 'export-data')}</div></section>
       <section class="settings-section"><h3>迁移与恢复</h3><p>可导入浏览器原型或 Windows 版导出的 JSON。确认替换前会自动保存桌面版现有数据。</p><div class="button-row">${btn('导入 JSON 备份', 'choose-import')}${btn('清空工作空间', 'confirm-reset', '', 'btn btn-danger-soft')}<input type="file" id="import-file" accept="application/json,.json" hidden /></div></section>`, btn('完成', 'close-modal', '', 'btn btn-primary'), '', true);
   }

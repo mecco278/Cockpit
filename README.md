@@ -4,9 +4,9 @@ Cockpit 是一款在 Windows 上本机运行的个人项目管理工具。把计
 
 ## 下载与启动
 
-在本仓库的 Releases 下载 `Cockpit-1.0.0-win-x64.zip`。完整解压后双击 `Cockpit.exe`。这是 64 位 Windows 便携版，运行时无需另装 Node.js 或启动网页服务。首次打开是空白工作空间，在今日工作台点击「创建首个项目」即可开始。
+下载并双击 `Cockpit-1.0.1-win-x64-setup.exe`，按向导安装。安装后可以从开始菜单打开，也可以在安装时勾选创建桌面快捷方式。适用于 Windows x64，运行时无需另装 Node.js。首次打开是空白工作空间，在今日工作台点击「创建首个项目」即可开始。[直接下载 Windows 安装程序](https://github.com/mecco278/Cockpit/releases/download/v1.0.1/Cockpit-1.0.1-win-x64-setup.exe)
 
-从旧版升级时，先关闭 Cockpit，再打开新版。工作空间保存在 `%LOCALAPPDATA%\Cockpit`，新版会继续读取这个目录。已有的浏览器数据可以先导出 JSON，再从 Windows 版「数据与备份」导入。
+从便携版升级时，先关闭旧版，再运行安装程序。新版会读取 `%LOCALAPPDATA%\Cockpit` 中的已有工作空间。可以在 Windows「设置 → 应用 → 已安装的应用」中卸载 Cockpit。卸载后，本机工作空间和备份仍可供重新安装时使用。已有的浏览器数据可以先导出 JSON，再从 Windows 版「数据与备份」导入。
 
 ## 功能
 
@@ -27,10 +27,10 @@ Cockpit 是一款在 Windows 上本机运行的个人项目管理工具。把计
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\desktop\build.ps1
 ```
 
-完成后可双击 `打开Cockpit.cmd`，或直接打开 `dist\Cockpit-1.0.0-win-x64\Cockpit.exe`。
+完成后可双击 `打开Cockpit.cmd`，或直接打开 `dist\Cockpit-1.0.1-win-x64\Cockpit.exe`。安装程序及 SHA-256 校验文件的构建步骤见 Windows 构建说明。
 
 开发与测试使用 Node.js 24 或更高版本。Windows 桌面端、共享界面及日常使用说明见下方。
 
 - [Windows 使用、数据与构建](desktop/README.md)
 - [共享界面与浏览器预览](prototype/README.md)
-- [1.0.0 发布说明](docs/RELEASE.md)
+- [1.0.1 发布说明](docs/RELEASE.md)

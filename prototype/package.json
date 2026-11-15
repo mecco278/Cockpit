@@ -1,6 +1,6 @@
 {
   "name": "xingjin-interactive-prototype",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "description": "个人项目管理交互原型，本地示例工作空间",

@@ -1,8 +1,8 @@
-# Cockpit Windows 便携版 1.0.0
+# Cockpit Windows 桌面版 1.0.1
 
-完整解压便携包后双击 `Cockpit.exe`。从源码构建后，也可双击仓库根目录的 `打开Cockpit.cmd`。应用直接读取随包附带的界面资源，无需启动本地服务或安装 Node.js。
+双击 `Cockpit-1.0.1-win-x64-setup.exe`，按安装向导完成安装。程序默认安装到当前用户的 `%LOCALAPPDATA%\Programs\Cockpit`，通过开始菜单或安装时选择创建的桌面快捷方式启动。应用直接读取随包附带的界面资源，无需启动本地服务或安装 Node.js。[直接下载 Windows 安装程序](https://github.com/mecco278/Cockpit/releases/download/v1.0.1/Cockpit-1.0.1-win-x64-setup.exe)
 
-新的工作空间从零个项目开始。升级前先关闭旧版，新版会读取同一个本地工作空间。
+新的工作空间从零个项目开始。从旧便携版切换前，先退出旧程序，新版会读取同一个本机工作空间。可在 Windows「设置 → 应用 → 已安装的应用」里卸载。卸载会保留工作空间与备份。
 
 ## 进度记录
 
@@ -69,9 +69,9 @@
 - 「数据与备份」显示最近成功备份时间，可以立即备份、打开备份文件夹，或把副本导出到自己选择的位置。若希望电脑或磁盘出故障后也能恢复，请把一份导出保存在另一块盘上。
 - 「数据与备份 → 清空工作空间」会先保留本机备份，再回到空白状态。
 - 恢复时，在同一菜单选择备份文件即可。桌面工作空间无法打开时，先关闭 Cockpit 并保留整个 `%LOCALAPPDATA%\Cockpit` 文件夹；不要删除数据库。可将旧目录另行保存，再启动以创建新目录，从旧目录 `backups` 中恢复一份有效备份。
-- 后续手动更换应用文件夹时，先关闭程序并导出一份备份。保留 `%LOCALAPPDATA%\Cockpit`。跨版本的升级与回退会随新版本单独验证。
+- 更新应用时退出正在运行的 Cockpit，再运行新版安装程序。
 
-截止提醒在应用内显示。每周复盘使用本地规则。1.0.0 以便携包分发，更新时替换应用文件夹即可。
+截止提醒在应用内显示。每周复盘使用本地规则。
 
 工作空间和导出的 JSON 由本机账户的文件访问权限保护，应用未额外加密。备份中的 SHA-256 用于检验内容完整性；仅导入来自可信来源的项目备份。
 
@@ -84,5 +84,11 @@ npm test --prefix prototype
 ```
 
 构建脚本固定 Electron 版本并校验运行时压缩包。已有压缩包可通过 `-RuntimeArchive` 指定。单元测试需要 Node.js 24 或更高版本。
+
+如需打包发布，安装 Inno Setup 7，再从仓库根目录运行下列命令。如果编译器位于其他目录，可用 `-CompilerPath` 指定 `ISCC.exe`。脚本从源码构建，并在 `dist` 生成 `Cockpit-1.0.1-win-x64-setup.exe` 和对应的 `.sha256` 文件。[Inno Setup 下载](https://jrsoftware.org/inno-setup/downloads)
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\desktop\build-installer.ps1
+```
 
 打包后的应用可通过 Playwright 验证。准备 Playwright 包后，运行 `node .\desktop\tests\desktop.browser.mjs --playwright-path 'Playwright 包目录'`。测试用独立临时目录保存数据。可附加 `--previous-exe '旧版 Cockpit.exe 路径'` 验证读取旧版工作空间。

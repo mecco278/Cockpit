@@ -1,4 +1,4 @@
-param([string]$RuntimeArchive)
+param([string]$RuntimeArchive, [string]$OutputDirectory)
 
 $ErrorActionPreference = 'Stop'
 $electronVersion = '45.3.3'
@@ -24,7 +24,7 @@ if ((Get-FileHash -LiteralPath $RuntimeArchive -Algorithm SHA256).Hash -ne $expe
 
 $manifest = Get-Content -LiteralPath (Join-Path $PSScriptRoot 'package.json') -Raw -Encoding UTF8 | ConvertFrom-Json
 $folder = "Cockpit-$($manifest.version)-win-x64"
-$dist = Join-Path $workspace 'dist'
+$dist = if ($OutputDirectory) { $OutputDirectory } else { Join-Path $workspace 'dist' }
 New-Item -ItemType Directory -Path $dist -Force | Out-Null
 $dist = (Resolve-Path -LiteralPath $dist).Path
 $out = Join-Path $dist $folder

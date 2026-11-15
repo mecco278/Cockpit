@@ -1,21 +1,16 @@
-# Cockpit 1.0.0
+# Cockpit 1.0.1
 
-2026 年 11 月 15 日 · Windows x64
+本次更新为 Windows x64 提供 `.exe` 安装程序。双击安装包即可进入安装向导，可以选择安装目录和是否创建桌面快捷方式。安装完成后可立即启动，也可从开始菜单打开，并在 Windows 设置中卸载。
 
-本次发布包括项目看板与行动树、可自定义的今日工作台、进度记录与周月回顾、思维导图、随手记、日历、全局搜索和本机备份。进度记录可修订，阻碍和导图想法可转为待办，并能从行动详情回看来源。
+首次使用从空白工作空间开始。此前用过便携版时，请先退出旧程序，新版会读取 `%LOCALAPPDATA%\Cockpit` 中的现有项目。卸载后，本机工作空间和备份可以在重新安装时继续使用。
 
-首次使用时从空白工作空间开始。点击「创建首个项目」建立自己的项目。
+## 下载
 
-## Windows 下载
+- [Windows x64 安装程序](https://github.com/mecco278/Cockpit/releases/download/v1.0.1/Cockpit-1.0.1-win-x64-setup.exe)
+- [SHA-256 校验文件](https://github.com/mecco278/Cockpit/releases/download/v1.0.1/Cockpit-1.0.1-win-x64-setup.exe.sha256)
 
-下载 `Cockpit-1.0.0-win-x64.zip`，完整解压后运行 `Cockpit.exe`。若此前已使用 Cockpit，先退出旧程序；新版本沿用 `%LOCALAPPDATA%\Cockpit` 里的工作空间。便携包未做 Windows 代码签名，下载页可同时提供 SHA-256 校验文件。
+安装程序当前未做 Windows 代码签名，系统可能提示无法验证发布者。可对照 SHA-256 文件校验下载内容。
 
-## 发布到 GitHub
+## 发布
 
-1. 将源码提交到公开仓库的 `main` 分支。仓库包含源码、文档和自动化测试源码。
-2. 以该提交创建标签 `v1.0.0` 和 GitHub Release，发行标题填写 `Cockpit 1.0.0`。
-3. 将 `Cockpit-1.0.0-win-x64.zip` 和对应的 `.sha256` 上传为 Release 附件。GitHub 会根据标签自动提供源码归档。
-
-便携包适合作为 Release 附件。构建目录、Electron 缓存、工作空间、备份和测试运行产物都应留在 Git 仓库之外。[GitHub Releases 文档](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
-
-便携包随附 Electron 和 Chromium 的第三方许可证。Cockpit 源码的授权条款由项目维护者决定。
+运行 `desktop/build-installer.ps1` 生成安装程序和校验文件，将两份文件上传至与对应源码提交关联的 GitHub Release。构建目录、Electron 缓存、工作空间和备份留在 Git 仓库之外。安装程序内附 Electron 和 Chromium 的第三方许可证。[GitHub Releases 文档](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)
