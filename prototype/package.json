@@ -1,0 +1,12 @@
+{
+  "name": "xingjin-interactive-prototype",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "个人项目管理交互原型，本地示例工作空间",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

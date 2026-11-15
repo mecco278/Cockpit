@@ -1,0 +1,177 @@
+/* v0.2: readable foregrounds, user-controlled urgency, and collapsible task trees. */
+:root {
+  --ink: #23372f;
+  --muted: #4f6257;
+  --line: #d8e0d2;
+}
+.page-heading h1 { letter-spacing: -.6px; }
+.page-heading p { font-size: 13px; color: #4f6257; }
+.title-button, .task-card-title, .snippet-body strong { font-size: 14px; color: #263e31; }
+.project-shortcut, .nav-item { color: #4c6052; font-size: 13px; }
+.nav-item.active { color: #fff; }
+.sidebar-label, .workspace-label small, .brand small, .prototype-note,
+.prototype-note small, .version, .breadcrumb, .breadcrumb strong, .saved-indicator,
+.eyebrow, .section-label, .date-text, .daily-summary, .daily-summary .quiet,
+.task-meta, .project-tag, .task-meta .project-tag, .panel-footnote,
+.snippet-body > span, .snippet-body .project-tag, .snippet-body > small,
+.bar-value, .bar-label, .rhythm-panel > p, .page-footer,
+.project-goal > p, .project-goal > p strong, .project-stats small,
+.board-hint, .kanban-heading h3, .kanban-heading > span, .card-topline > span,
+.task-card > p, .card-meta, .card-controls select, .kanban-add, .kanban-empty,
+.milestone-item p, .milestone-item small, .project-notes > p, .project-notes ul,
+.filter-bar label, .filter-count, .journal-date > span, .journal-field,
+.journal-field > span, .journal-footer > span, .review-scope,
+.review-preview-stats span, .fact-grid span, .review-summary, .source-label,
+.reasoning-panel > p, .suggestions-panel > p, .suggestion > p, .suggestion-meta,
+.suggestions-panel > .fine-print, .revision-row p, .revision-row small,
+.inline-empty, .review-empty > p, .review-empty > small, .detail-meta,
+.detail-field > span, .detail-field > p, .pick-item small, .settings-section > p,
+.settings-status p, .feedback-list p, .diff-list small, .fine-print,
+.dialog-body > p, .dialog-body .fine-print, .dialog-body > label,
+.dialog-body .form-row > label, .adjustment-list label, .dialog-body .check-label {
+  color: #4f6257;
+  font-size: 12px;
+}
+.task-card > p, .journal-field, .reasoning-panel > p,
+.detail-field > p, .dialog-body > p { font-size: 13px; }
+.welcome-note, .notice { color: #405c39; }
+.text-btn, .strategy-line strong, .suggestion strong,
+.revision-row h3, .journal-card h2, .task-detail-title,
+.milestone-item h3, .settings-section h3, .settings-status strong,
+.pick-item strong, .diff-list strong { color: #315738; }
+.pill { background: #edf1e8; color: #4b5e42; font-size: 11px; }
+.pill.green { background: #e5efdc; color: #315829; }
+.pill.orange { background: #ffedce; color: #835016; }
+.pill.demo { background: #edf1e8; color: #4b5e42; }
+.journal-field.blocker, .journal-field.blocker > span,
+.waiting-card > p, .waiting-card h3, .waiting-card .text-btn { color: #805622; }
+.fact-grid strong, .project-stats strong { color: #365b34; }
+.fact-grid strong small, .project-stats strong > span { color: #576b4e; }
+.task-card.is-done .task-card-title { color: #4b6041; }
+.suggestion.processed { opacity: 1; }
+.btn:disabled { opacity: 1; background: #e5ebe1; border-color: #d1dcc8; color: #536749; }
+.experience-guide li { color: #5d6e51; }
+.experience-guide li.finished { color: #355a30; }
+.experience-guide li.current { color: #234a2e; }
+.experience-guide li > span { border-color: #8da278; }
+.icon-btn { color: #546d4b; }
+.focus-card .focus-eyebrow, .focus-card > p, .focus-milestone span,
+.focus-bottom { color: #c4d6ba; }
+.focus-card h2, .focus-milestone strong { color: #f6faed; }
+.focus-link { color: #dfefc5; }
+.breadcrumb span, .scope-divider { color: #566b51; }
+.count, .guide-caption, .journal-date strong, .tab { color: #4f6257; }
+.daily-summary strong, .review-preview-stats strong { color: #355b35; }
+.notice.warning { color: #7d4f1f; }
+.strategy-line span, .review-history > h3, .new-label,
+.adjustment-list legend { color: #4c6340; }
+.required { color: #85501a; }
+.form-error { color: #8b3d29 !important; }
+.task-check { border-color: #789569; }
+input, textarea, select { color: #2b4234; border-color: #b9c8ad; }
+input::placeholder, textarea::placeholder { color: #687660; font-size: 12px; }
+
+[data-priority="urgent"] { --priority-surface: #fff1ef; --priority-edge: #b64439; }
+[data-priority="high"] { --priority-surface: #fff6e5; --priority-edge: #a96b1d; }
+[data-priority="normal"] { --priority-surface: #fff; --priority-edge: #a5b29b; }
+[data-priority="low"] { --priority-surface: #eef4fb; --priority-edge: #51789d; }
+.today-task[data-priority], .task-card[data-priority] {
+  background: var(--priority-surface);
+  border-left: 4px solid var(--priority-edge);
+}
+.today-task[data-priority] { padding-left: 21px; }
+.today-task .task-row-actions { flex-direction: column; align-items: flex-end; gap: 9px; }
+.task-row-actions > div { display: flex; align-items: center; gap: 12px; }
+.task-row-actions .text-btn { font-size: 12px; }
+.today-task .task-row-actions > div > .tiny { opacity: 1; }
+.today-task-body { min-width: 0; }
+.priority-control { display: inline-flex; flex-shrink: 0; max-width: 100%; }
+.priority-select {
+  font-size: 12px;
+  padding: 5px 20px 5px 8px;
+  border-radius: 6px;
+  font-weight: 550;
+  line-height: 1.7;
+  min-width: 106px;
+  max-width: 100%;
+}
+.priority-urgent { color: #862a23; background: #ffe4df; border-color: #c77970; }
+.priority-high { color: #77470b; background: #ffedc9; border-color: #c59951; }
+.priority-normal { color: #43553b; background: #fff; border-color: #a6b599; }
+.priority-low { color: #294f75; background: #e4eefb; border-color: #8ba8c4; }
+.card-topline { gap: 6px; flex-wrap: wrap; }
+.card-controls { gap: 7px; flex-wrap: wrap; }
+.card-controls .text-btn { font-size: 12px; margin-left: auto; }
+.card-controls select { flex: 0 1 90px; }
+.parent-breadcrumb {
+  display: inline-flex; align-items: center; gap: 5px; border: 0;
+  background: transparent; color: #506348; max-width: 100%;
+  font-size: 12px; padding: 6px 0 0; text-align: left;
+}
+.parent-breadcrumb span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.parent-breadcrumb .icon { width: 13px; height: 13px; }
+.parent-breadcrumb:hover { color: #214c32; text-decoration: underline; }
+.parent-context { padding: 15px; border-radius: 9px; background: #edf3e7; border: 1px solid #d2dfc7; }
+.parent-context span { display: block; font-size: 12px; color: #506347; }
+.parent-context strong { display: block; font-size: 14px; margin: 8px 0; line-height: 1.8; color: #29472d; }
+.parent-context small { display: block; color: #506347; font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+.child-detail-list { display: flex; flex-direction: column; gap: 9px; }
+.child-detail-link { display: flex; align-items: center; justify-content: space-between; text-align: left; width: 100%; border: 1px solid #d5e0cb; background: #f5f8ef; padding: 12px; border-radius: 7px; color: #385731; font-size: 13px; line-height: 1.8; }
+.child-detail-link .icon { margin-left: 10px; flex-shrink: 0; }
+.tree-intro { padding: 23px; display: flex; gap: 20px; align-items: center; justify-content: space-between; }
+.tree-intro > div:first-child { flex: 1; }
+.tree-intro p { font-size: 13px; color: #4f6257; margin-top: 5px; }
+.tree-intro .button-row { flex-shrink: 0; margin: 0; }
+.tree-warning { margin: 0 22px 18px; }
+.tree-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 18px 20px 18px calc(20px + var(--tree-depth) * 22px); border-top: 1px solid #e1e7da; background: #fff; }
+.tree-row:hover { background: #f8faf4; }
+.tree-main { flex: 1; min-width: 0; }
+.tree-title { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.tree-title .title-button { flex: 1; min-width: 100px; }
+.branch-toggle, .tree-leaf-marker { width: 26px; height: 26px; flex-shrink: 0; border-radius: 6px; display: inline-grid; place-items: center; border: 1px solid #c5d5b7; background: #eff4e9; color: #45673b; padding: 4px; }
+.tree-leaf-marker { background: #fff; border-color: #d8e3ce; color: #687a56; }
+.tree-leaf-marker.done { background: #eaf2e1; color: #345b2a; }
+.branch-toggle .icon, .tree-leaf-marker .icon { height: 15px; width: 15px; }
+.branch-toggle.expanded .icon { transform: rotate(90deg); }
+.tree-meta { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 7px 0 0 35px; font-size: 12px; color: #52664a; line-height: 1.8; }
+.group-progress { font-weight: 550; color: #355c2e; }
+.tree-actions { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.tree-actions .btn-small { font-size: 12px; }
+.project-toolbar .tabs { flex-wrap: wrap; row-gap: 12px; }
+
+@media(max-width:1200px) {
+  .today-task[data-priority] { padding-left: 16px; }
+  .tree-row { flex-wrap: wrap; gap: 12px; }
+  .tree-main { flex-basis: 100%; }
+  .tree-actions { margin-left: 35px; justify-content: flex-start; }
+  .tree-intro { flex-wrap: wrap; }
+}
+@media(max-width:1030px) {
+  .today-task { align-items: flex-start; flex-wrap: wrap; }
+  .today-task-body { flex-basis: calc(100% - 35px); }
+  .today-task .task-row-actions { flex-direction: row; align-items: center; justify-content: space-between; width: calc(100% - 31px); height: auto; margin: 9px 0 0 31px; }
+}
+@media(max-width:680px) {
+  .nav-item { font-size: 11px; }
+  .nav-item.active { color: #2d4d32; }
+  .experience-guide li, .experience-guide .text-btn { font-size: 11px; }
+  .page-heading p { font-size: 13px; }
+  .today-task[data-priority] { padding-left: 14px; }
+  .today-task .task-row-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .priority-select { font-size: 12px; }
+  .task-meta, .project-tag, .card-meta, .task-meta .project-tag, .panel-footnote { font-size: 12px; }
+  .task-meta { gap: 8px 12px; }
+  .tree-intro { padding: 19px; gap: 15px; }
+  .tree-intro p { font-size: 12px; }
+  .tree-row { padding: 16px 13px 16px calc(13px + var(--tree-depth) * 11px); gap: 12px; }
+  .tree-actions { margin-left: 0; gap: 8px; }
+  .tree-title { gap: 7px; }
+  .tree-title .title-button { font-size: 13px; }
+  .tree-meta { margin-left: 0; }
+  .tree-warning { margin: 0 13px 14px; }
+  .tabs { gap: 17px; }
+  .tab { font-size: 12px; }
+  .project-toolbar { align-items: flex-start; }
+  .task-card > p { font-size: 13px; }
+  .focus-card, .rhythm-panel { min-height: 290px; }
+}

@@ -1,0 +1,17 @@
+/dist/
+node_modules/
+.runtime/
+test-results/
+.env
+.env.*
+*.log
+*.sqlite*
+*.db*
+backups/
+Cockpit-*.json
+/docs/Cockpit_Gemini_Review/
+/docs/Cockpit_Gemini_Review.zip
+/docs/ITERATION_*.md
+/docs/INITIAL_PRODUCT_PLAN.md
+/docs/PROTOTYPE_VERIFICATION.md
+/docs/UI_UX_AUDIT_*.md
